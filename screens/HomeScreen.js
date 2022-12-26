@@ -27,15 +27,12 @@ import category from '../sanity/schemas/category';
 
     useEffect(() =>{
         sanityClient.fetch(
-            `*[_type =="featured"]{
+            `*[_type =="featured"] {
                 ...,
                 restaurants[] ->{
                   ...,
-                  dishes[] ->,
-                    type ->{
-                      name
-                    }
-                },
+                  dishes[] ->
+                }
               }`
         ).then((data) =>{
             setFeaturedCategories(data);
