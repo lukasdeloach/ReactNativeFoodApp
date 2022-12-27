@@ -5,6 +5,7 @@ import RestaurantCard from './RestaurantCard';
 import { useEffect } from 'react';
 import client from '../sanity';
 import { useState } from 'react';
+import featured from '../sanity/schemas/featured';
 
 const FeaturedRow = ({id, title, description}) => {
   const [restaurants, setRestaurants] = useState([]);
@@ -25,7 +26,7 @@ const FeaturedRow = ({id, title, description}) => {
     { id }).then((data) => {
       setRestaurants(data?.restaurants);
     });
-  }, []);
+  }, [id]);
   console.log(restaurants);
 
   return (
@@ -54,7 +55,7 @@ const FeaturedRow = ({id, title, description}) => {
             id={restaurant._id}
             imgUrl={restaurant.image}
             address={restaurant.address}
-            title={restaurant.title}
+            name={restaurant.name}
             dishes={restaurant.dishes}
             rating={restaurant.rating}
             short_description={restaurant.short_description}

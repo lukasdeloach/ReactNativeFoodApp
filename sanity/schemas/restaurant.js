@@ -5,7 +5,7 @@ export default {
   type: 'document',
   fields: [
     {
-      name: "string",
+      name: "name",
       type: "string",
       title: "Restaurant Name",
       validation: (Rule) => Rule.required(),
@@ -24,7 +24,7 @@ export default {
     {
       name: "lat",
       type: "number",
-      title: "Latitude of the Restaurant",
+      title: "Latitude of the Restraurant",
     },
     {
       name: "long",

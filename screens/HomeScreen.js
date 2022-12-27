@@ -27,7 +27,7 @@ import category from '../sanity/schemas/category';
 
     useEffect(() =>{
         sanityClient.fetch(
-            `*[_type =="featured"] {
+            `*[_type == "featured"] {
                 ...,
                 restaurants[] ->{
                   ...,
@@ -84,10 +84,9 @@ import category from '../sanity/schemas/category';
                 <FeaturedRow 
                     key={category._id}
                     id={category._id}
-                    name={category.name}
-                    category={category.short_description}
-                    />
-                    
+                    title={category.name}
+                    description={category.short_description}
+                    /> 
             ))}
         </ScrollView>
     </SafeAreaView>
