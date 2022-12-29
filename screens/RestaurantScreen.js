@@ -1,13 +1,17 @@
 import { View, Text, ScrollView, Image, Touchable } from 'react-native'
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { urlFor } from '../sanity';
 import { TouchableOpacity } from 'react-native';
 import { ArrowLeftIcon, ChevronRightIcon, MapPinIcon, QuestionMarkCircleIcon, StarIcon } from 'react-native-heroicons/outline';
 import DishRow from '../components/DishRow';
+import BasketIcon from '../components/BasketIcon';
+import restaurantSlice, { setRestaurant } from '../features/restaurantSlice';
+import { useDispatch } from 'react-redux';
 
 const RestaurantScreen = () => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
 
     const { 
         params: {
@@ -24,6 +28,21 @@ const RestaurantScreen = () => {
         },
     } = useRoute();
 
+    useEffect(() => {
+        dispatch(setRestaurant({
+            id, 
+            imgUrl,
+            name,
+            rating,
+            genre,
+            address,
+            dishes,
+            short_description,
+            long, 
+            lat,
+        }))
+    }, [dispatch])
+
     useLayoutEffect(() => {
         navigation.setOptions({
             headerShown: false,
@@ -31,6 +50,8 @@ const RestaurantScreen = () => {
     }, []);
 
   return (
+    <>
+    <BasketIcon />
     <ScrollView>
       <View className="relative">
         <Image 
@@ -72,11 +93,11 @@ const RestaurantScreen = () => {
             </Text>
             <ChevronRightIcon color="#00CCCB" />
         </TouchableOpacity>
-        <View>
+        <View className="pb-36">
             <Text className="px-4 pt-5 mb-3 font-bold text-xl">Menu</Text>
             {/*Dish row*/}
             {dishes.map((dish) => (
-                <DishRow 
+                <DishRow
                     key={dish._id}
                     id={dish._id}
                     name={dish.name}
@@ -89,6 +110,7 @@ const RestaurantScreen = () => {
         </View>
       </View>
     </ScrollView>
+    </>
   )
 }
 

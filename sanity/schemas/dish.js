@@ -26,5 +26,11 @@ export default {
       type: "image",
       title: "Image of the dish",
     },
+    {
+      name: "restaurant",
+      title: "Restaurant",
+      type: "reference",
+      to: [{type: "restaurant"}],
+    }
   ],
 };
