@@ -6,8 +6,13 @@ import { TouchableOpacity } from 'react-native';
 import { ArrowLeftIcon, ChevronRightIcon, MapPinIcon, QuestionMarkCircleIcon, StarIcon } from 'react-native-heroicons/outline';
 import DishRow from '../components/DishRow';
 import BasketIcon from '../components/BasketIcon';
-import restaurantSlice, { setRestaurant } from '../features/restaurantSlice';
+import { setRestaurant } from '../features/restaurantSlice';
 import { useDispatch } from 'react-redux';
+
+let restname = "";
+let latitude = 0;
+let longitude = 0;
+
 
 const RestaurantScreen = () => {
     const navigation = useNavigation();
@@ -27,6 +32,10 @@ const RestaurantScreen = () => {
             lat,
         },
     } = useRoute();
+    restname = name;
+    latitude = lat;
+    longitude = long;
+
 
     useEffect(() => {
         dispatch(setRestaurant({
@@ -40,8 +49,10 @@ const RestaurantScreen = () => {
             short_description,
             long, 
             lat,
-        }))
-    }, [dispatch])
+        })
+    );
+    }, [dispatch]);
+    console.log(restname);
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -112,6 +123,18 @@ const RestaurantScreen = () => {
     </ScrollView>
     </>
   )
+}
+
+export function getName(){
+    return restname;
+}
+
+export function getLong(){
+    return longitude;
+}
+
+export function getLat(){
+    return latitude;
 }
 
 export default RestaurantScreen
